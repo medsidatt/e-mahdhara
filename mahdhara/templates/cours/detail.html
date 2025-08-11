@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ object.titre }}</title>
+    <style>
+      .locked {
+        color: red;
+        margin-right: 5px;
+      }
+      .unlocked {
+        color: green;
+        margin-right: 5px;
+      }
+    </style>
+</head>
+<body>
+    <h1>{{ object.titre }}</h1>
+    <p>{{ object.description }}</p>
+    <p>
+        {% if object.est_gratuit %}
+            <strong>Gratuit</strong>
+        {% else %}
+            <strong>Payant : {{ object.prix }} €</strong>
+        {% endif %}
+    </p>
+
+    <h2>Leçons</h2>
+    <ul>
+        {% for lecon in object.lecon_set.all %}
+            <li>
+                {% if object.est_gratuit %}
+                    <span class="unlocked">&#128275;</span> <!-- cadenas ouvert -->
+                    <a href="{% url 'lecon_detail' lecon.pk %}">{{ lecon.titre }}</a>
+                {% else %}
+                    {% if user.is_authenticated and user.est_inscrit(object) %}
+                        <span class="unlocked">&#128275;</span>
+                        <a href="{% url 'lecon_detail' lecon.pk %}">{{ lecon.titre }}</a>
+                    {% else %}
+                        <span class="locked">&#128274;</span> <!-- cadenas fermé -->
+                        <span>{{ lecon.titre }}</span>
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>Aucune leçon disponible.</li>
+        {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated %}
+        <a href="#">S’inscrire à ce cours</a>
+    {% else %}
+        <a href="{% url 'account_login' %}?next={{ request.path }}">Connectez-vous pour vous inscrire</a>
+    {% endif %}
+
+    <p><a href="{% url 'home' %}">Retour à l’accueil</a></p>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Logout - Mahdhara{% endblock %}
+
+{% block content %}
+<div class="flex justify-center items-center min-h-screen">
+  <div class="bg-white shadow-xl rounded-lg p-8 w-full max-w-md text-gray-800 text-center">
+    <h1 class="text-2xl font-bold mb-4">{% trans "Log Out" %}</h1>
+    <p class="mb-6">{% trans "Are you sure you want to log out?" %}</p>
+
+    <form method="post" action="{% url 'account_logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800">
+        {% trans "Log Out" %}
+      </button>
+    </form>
+    <a href="/" class="block mt-4 text-green-700 hover:underline">{% trans "Cancel" %}</a>
+  </div>
+</div>
+{% endblock %}

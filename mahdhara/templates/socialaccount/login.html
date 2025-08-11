@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Social Login - Mahdhara{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-transparent">
+  <div class="bg-[#422f1d] bg-opacity-80 p-8 rounded-lg shadow-lg max-w-md w-full text-yellow-100 text-center" style="font-family: 'Amiri', serif;">
+
+    <h2 class="text-2xl font-bold mb-4">Sign in with {{ provider.name }}</h2>
+
+    <p class="mb-6">
+      You are about to sign in using a third-party account from <strong>{{ provider.name }}</strong>.
+    </p>
+
+    <form method="post" action="">
+      {% csrf_token %}
+      <button type="submit" class="bg-yellow-400 hover:bg-yellow-300 text-[#3b2f2f] font-semibold py-2 px-6 rounded">
+        Continue
+      </button>
+    </form>
+
+    <p class="mt-6">
+      <a href="{% url 'account_login' %}" class="text-yellow-300 hover:underline">
+        Cancel and return to login
+      </a>
+    </p>
+
+  </div>
+</div>
+{% endblock %}

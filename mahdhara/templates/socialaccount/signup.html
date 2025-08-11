@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-md mx-auto mt-16 p-6 bg-white rounded shadow">
+  <h2 class="text-xl font-bold mb-4">Sign in with {{ provider.name }}</h2>
+  <p>You are about to sign in using your {{ provider.name }} account.</p>
+  <form method="post" action="{% url 'socialaccount_signup' %}">
+    {% csrf_token %}
+    <button type="submit" class="mt-4 px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800">
+      Continue
+    </button>
+  </form>
+</div>
+{% endblock %}
