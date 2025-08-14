@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="p-6">
+    <h1 class="text-xl font-bold">Supprimer le Cours</h1>
+    <p>Êtes-vous sûr de vouloir supprimer "{{ object.titre }}" ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="bg-red-500 px-4 py-2 rounded text-white">Oui</button>
+        <a href="{% url 'manage_courses' %}" class="ml-2">Annuler</a>
+    </form>
+</div>
+{% endblock %}

@@ -22,7 +22,10 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 
+from accounts.views import StudentSignupView
 from cours.models import Cours
+from accounts import views
+from mahdhara.views import instructor_signup
 
 
 class HomeView(ListView):
@@ -30,9 +33,16 @@ class HomeView(ListView):
     template_name = 'home.html'
     context_object_name = 'courses'
     ordering = ['-date_creation']
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('accounts/signup/', StudentSignupView.as_view(), name='account_signup'),
+
     path('accounts/', include('allauth.urls')),
     path('', HomeView.as_view(), name='home'),
     path('cours/', include('cours.urls')),
+    path("cheikh/", include("cheikh.urls")),
+    path("instructor-signup/", views.instructor_signup_page, name="instructor_signup")
+
 ]

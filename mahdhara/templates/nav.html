@@ -1,19 +1,27 @@
 <nav class="bg-opacity-80 bg-[#3b2f2f] shadow-md">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <a href="/" class="text-2xl font-bold text-yellow-400 tracking-widest">Mahdhara</a>
-        <div class="hidden md:flex space-x-6">
-            <a href="#" class="hover:text-yellow-400">My Learning</a>
 
-            <div class="space-x-4">
-                {% if user.is_authenticated %}
-                    <span>Welcome, {{ user.username }}</span>
-                    <a href="{% url 'account_logout' %}" class="hover:underline">Logout</a>
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-6">
+            {% if user.is_authenticated %}
+                {% if user.role == 'cheikh' %}
+                    <a href="{% url 'manage_courses' %}" class="hover:text-yellow-400">Manage Courses</a>
                 {% else %}
-                    <a href="{% url 'account_login' %}" class="hover:underline">Login</a>
-                    <a href="{% url 'account_signup' %}" class="hover:underline">Sign Up</a>
+                    <a href="{% url 'my_learning' %}" class="hover:text-yellow-400">My Learning</a>
                 {% endif %}
-            </div>
+                <a href="{% url 'account_logout' %}" class="hover:underline">Logout</a>
+            {% else %}
+                <a href="{% url 'account_login' %}" class="hover:underline">Login</a>
+                <a href="{% url 'account_signup' %}" class="hover:underline">Sign Up (Student)</a>
+                <a href="{% url 'instructor_signup' %}"
+                   class="bg-yellow-400 text-[#3b2f2f] px-4 py-2 rounded hover:bg-yellow-300">
+                    Become an Instructor
+                </a>
+            {% endif %}
         </div>
+
+        <!-- Mobile Menu Button -->
         <div class="md:hidden">
             <button id="menu-btn" class="text-yellow-400 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor"
@@ -24,12 +32,23 @@
             </button>
         </div>
     </div>
+
+    <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 bg-[#3b2f2f] bg-opacity-90">
-        <a href="#" class="block hover:text-yellow-400">Courses</a>
-        <a href="#" class="block hover:text-yellow-400">My Learning</a>
-        <a href="#" class="block hover:text-yellow-400">Quran Tafsir</a>
-        <a href="#" class="block hover:text-yellow-400">Login</a>
-        <a href="#" class="block bg-yellow-400 text-[#3b2f2f] px-4 py-2 rounded hover:bg-yellow-300 text-center">Sign
-            Up</a>
+        {% if user.is_authenticated %}
+            {% if user.role == 'cheikh' %}
+                <a href="{% url 'manage_courses' %}" class="block hover:text-yellow-400">Manage Courses</a>
+            {% else %}
+                <a href="{% url 'my_learning' %}" class="block hover:text-yellow-400">My Learning</a>
+            {% endif %}
+            <a href="{% url 'account_logout' %}" class="block hover:text-yellow-400">Logout</a>
+        {% else %}
+            <a href="{% url 'account_login' %}" class="block hover:text-yellow-400">Login</a>
+            <a href="{% url 'account_signup' %}" class="block hover:text-yellow-400">Sign Up (Student)</a>
+            <a href="{% url 'instructor_signup' %}"
+               class="block bg-yellow-400 text-[#3b2f2f] px-4 py-2 rounded hover:bg-yellow-300 text-center">
+                Become an Instructor
+            </a>
+        {% endif %}
     </div>
 </nav>

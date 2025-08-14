@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-4">Mes Cours</h1>
+    <a href="{% url 'course_create' %}" class="bg-green-500 px-4 py-2 rounded text-white">+ Nouveau Cours</a>
+    <ul class="mt-4">
+        {% for course in courses %}
+            <li class="border-b py-2 flex justify-between">
+                <span>{{ course.titre }}</span>
+                <div>
+                    <a href="{% url 'course_edit' course.pk %}" class="text-blue-500">Modifier</a> |
+                    <a href="{% url 'course_delete' course.pk %}" class="text-red-500">Supprimer</a>
+                </div>
+            </li>
+        {% empty %}
+            <li>Aucun cours trouvé.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

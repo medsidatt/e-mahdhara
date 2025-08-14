@@ -28,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# ACCOUNT_ADAPTER = "accounts.adapters.MySocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "accounts.adapters.MySocialAccountAdapter"
+
+
 AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
@@ -46,6 +50,7 @@ DJANGO_APPS = [
 PROJECT_APPS = [
     'accounts.apps.AccountsConfig',
     'cours.apps.CoursConfig',
+    'cheikh',
 ]
 
 THIRD_PARTY_APPS = [
@@ -70,6 +75,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mahdhara.urls'
+
+ACCOUNT_FORMS = {
+    'signup': 'accounts.forms.StudentSignupForm',
+}
+
 
 TEMPLATES = [
     {
@@ -153,4 +163,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-

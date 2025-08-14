@@ -19,10 +19,9 @@ class Migration(migrations.Migration):
             return
 
         superuser = User.objects.create_superuser(
-            username="medsidatt",
-            email="mdaloueimin@gmail.com",
+            username="super-admin",
+            email="super-admin@gmail.com",
             password="root",
-            role="admin",
             last_login=timezone.now()
         )
 
