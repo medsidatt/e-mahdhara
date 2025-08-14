@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Learning</h2>
+<ul>
+    {% for enrollment in enrollments %}
+        <li>{{ enrollment.cours.titre }} - {% if enrollment.completed %}Completed{% else %}In Progress{% endif %}</li>
+    {% empty %}
+        <li>No courses enrolled yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
