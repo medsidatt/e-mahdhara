@@ -20,8 +20,10 @@ class InstructorSignupForm(SignupForm):
         self.fields['password1'].label = "Password"
         self.fields['password2'].label = "Confirm Password"
 
-    def save(self, request):
+    def save(self, request, commit=True):
         user = super().save(request)
+        user.first_name = self.cleaned_data["first_name"]
+        user.last_name = self.cleaned_data["last_name"]
         user.role = "cheikh"  # Set instructor role
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']

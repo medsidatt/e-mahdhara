@@ -14,7 +14,7 @@ def instructor_signup_page(request):
     if request.method == "POST":
         form = InstructorSignupForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
+            user = form.save(request)
             user.role = "cheikh"
             user.save()
             login(request, user)
