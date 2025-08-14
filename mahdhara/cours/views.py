@@ -17,6 +17,28 @@ class ListeCoursView(LoginRequiredMixin, ListView):
     context_object_name = 'cours'
 
 
+from django.views.generic import DetailView
+from django.shortcuts import get_object_or_404
+from cours.models import Cours
+from student.models import Enrollment
+
+class CourseDetailView(DetailView):
+    model = Cours
+    template_name = "cours/detail.html"
+    context_object_name = "course"
+    pk_url_kwarg = "course_id"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated and getattr(user, "role", None) != "cheikh":
+            context['enrolled'] = Enrollment.objects.filter(student=user, cours=self.object).exists()
+        else:
+            context['enrolled'] = False
+        return context
+
+
+
 class CoursCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Cours
     fields = ['titre', 'description', 'prix']

@@ -12,7 +12,7 @@ def instructor_signup_page(request):
     - Social account login
     """
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = InstructorSignupForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.role = "cheikh"

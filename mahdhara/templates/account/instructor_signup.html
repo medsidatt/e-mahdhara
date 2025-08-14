@@ -9,7 +9,7 @@
                 <h3 class="card-title text-center mb-4">{% trans "Become an Instructor" %}</h3>
 
                 <!-- Custom signup form -->
-                <form method="POST" action="{% url 'account_signup' %}">
+                <form method="POST" action="{% url 'instructor_signup' %}">
                     {% csrf_token %}
                     {% for field in form %}
                         <div class="mb-3">

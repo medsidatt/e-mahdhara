@@ -43,6 +43,7 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('cours/', include('cours.urls')),
     path("cheikh/", include("cheikh.urls")),
-    path("instructor-signup/", views.instructor_signup_page, name="instructor_signup")
+    path("instructor-signup/", views.instructor_signup_page, name="instructor_signup"),
+    path('student/', include('student.urls')),
 
 ]

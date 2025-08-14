@@ -13,19 +13,21 @@
     <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
       {% for course in courses %}
-      <div class="bg-[#422f1d] bg-opacity-80 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow text-yellow-100">
-        <img src="{{ course.image }}" alt="{{ course.title }}" class="w-full h-40 object-cover" />
-        <div class="p-4">
-          <h3 class="font-semibold text-xl mb-2" style="font-family: 'Amiri', serif;">{{ course.title }}</h3>
-          <p class="text-yellow-300 text-sm mb-4">{{ course.description }}</p>
-          <div class="flex justify-between items-center">
-            <span class="font-bold text-yellow-300">${{ course.prix }}</span>
-            <button class="bg-yellow-400 text-[#3b2f2f] px-3 py-1 rounded hover:bg-yellow-300 text-sm font-semibold">
-              Enroll
-            </button>
+      <a href="{% url 'course_detail' course.id %}" class="block">
+        <div class="bg-[#422f1d] bg-opacity-80 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow text-yellow-100">
+          <img src="{{ course.image }}" alt="{{ course.titre }}" class="w-full h-40 object-cover" />
+          <div class="p-4">
+            <h3 class="font-semibold text-xl mb-2" style="font-family: 'Amiri', serif;">{{ course.titre }}</h3>
+            <p class="text-yellow-300 text-sm mb-4">{{ course.description }}</p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-yellow-300">${{ course.prix }}</span>
+              <span class="bg-yellow-400 text-[#3b2f2f] px-3 py-1 rounded text-sm font-semibold">
+                View Details
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      </a>
       {% endfor %}
 
     </div>

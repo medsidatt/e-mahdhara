@@ -5,11 +5,8 @@
         <!-- Desktop Menu -->
         <div class="hidden md:flex space-x-6">
             {% if user.is_authenticated %}
-                {% if user.role == 'cheikh' %}
-                    <a href="{% url 'manage_courses' %}" class="hover:text-yellow-400">Manage Courses</a>
-                {% else %}
-                    <a href="{% url 'my_learning' %}" class="hover:text-yellow-400">My Learning</a>
-                {% endif %}
+                <a href="{% url 'manage_courses' %}" class="hover:text-yellow-400">Manage Courses</a>
+                <a href="{% url 'my_learning' %}" class="hover:text-yellow-400">My Learning</a>
                 <a href="{% url 'account_logout' %}" class="hover:underline">Logout</a>
             {% else %}
                 <a href="{% url 'account_login' %}" class="hover:underline">Login</a>
@@ -36,18 +33,15 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 bg-[#3b2f2f] bg-opacity-90">
         {% if user.is_authenticated %}
-            {% if user.role == 'cheikh' %}
-                <a href="{% url 'manage_courses' %}" class="block hover:text-yellow-400">Manage Courses</a>
-            {% else %}
-                <a href="{% url 'my_learning' %}" class="block hover:text-yellow-400">My Learning</a>
-            {% endif %}
+            <a href="{% url 'manage_courses' %}" class="block hover:text-yellow-400">Manage Courses</a>
+            <a href="{% url 'my_learning' %}" class="block hover:text-yellow-400">My Learning</a>
             <a href="{% url 'account_logout' %}" class="block hover:text-yellow-400">Logout</a>
         {% else %}
             <a href="{% url 'account_login' %}" class="block hover:text-yellow-400">Login</a>
-            <a href="{% url 'account_signup' %}" class="block hover:text-yellow-400">Sign Up (Student)</a>
+            <a href="{% url 'account_signup' %}" class="block hover:text-yellow-400">Sign Up</a>
             <a href="{% url 'instructor_signup' %}"
                class="block bg-yellow-400 text-[#3b2f2f] px-4 py-2 rounded hover:bg-yellow-300 text-center">
-                Become an Instructor
+                Instructor
             </a>
         {% endif %}
     </div>
